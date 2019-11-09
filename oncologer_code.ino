@@ -1,48 +1,26 @@
-
-
-// include the library code:
-#include <LiquidCrystal.h>
-float a;
-float Value;
-float z;
-int t;
-// initialize the library by associating any needed LCD interface pin
-// with the arduino pin number it is connected to
-const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
-LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
-
+int ir = A0;
+int ir1 = A1;
 void setup() {
-  pinMode(A0,INPUT);
-  // set up the LCD's number of columns and rows:
-  lcd.begin(16, 2);
-  // Print a message to the LCD.
-  lcd.print("Oncologer");
-delay(2000);
-
+  // put your setup code here, to run once:
+pinMode(ir,INPUT);
+Serial.begin(115200);
 }
 
 void loop() {
-  // Turn off the display:
-for(t=0;t>1000;t++){
-a=analogRead(A0);
-z=z+a;
-delay(10);
-}
-z=z/1000;
-  if(z>Value){
-lcd.clear();
-  // Turn on the display:
-  lcd.print("good");
-  delay(500);
-    
-    }
-else{
-lcd.clear();
-  // Turn on the display:
-  lcd.print("Bad");
-  delay(500);
-    
-    }
+   float ira = (48.828*(analogRead(ir)))-3;
+   float ir1a = (48.828*(analogRead(ir1)))-3;
+   float irb = ira/0.03;
+   float ir1b = ir1a/0.03;
+   float fin = ir1a-ira;
+  // put your main code here, to run repeatedly:
+      //Serial.println("ira");
+  // Serial.println(ir);
+      //Serial.println(irb);
+      //Serial.println("ir1a");
+   //Serial.println(ir1);
+      //Serial.println(ir1b);
 
-  
+   Serial.println("impedence");
+   Serial.println(fin);
+delay(500);
 }
